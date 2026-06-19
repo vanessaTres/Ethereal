@@ -1,0 +1,1 @@
+uma função que vai cuspir o menu completo em todos os arquivos html
