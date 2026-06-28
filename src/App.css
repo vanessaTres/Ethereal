@@ -1,0 +1,284 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fdfaf6; 
+  color: #3e322e;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.cabecalho-etreal {
+  background-color: #fceeed; 
+  border-bottom: 1px solid #f2dbd9;
+  padding: 20px 4% 15px 4%; 
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.cabecalho-linha-superior {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px; 
+}
+
+.logo-site {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem; 
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #411515;
+  cursor: pointer;
+  user-select: none;
+  flex: 1; 
+}
+
+.caixa-pesquisa {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #e0cdcc;
+  border-radius: 25px; 
+  padding: 8px 12px 8px 20px; 
+  width: 40%; 
+  max-width: 600px;
+  transition: all 0.3s ease;
+}
+
+.caixa-pesquisa:focus-within {
+  border-color: #d1b1ae;
+  box-shadow: 0 0 8px rgba(209, 177, 174, 0.6);
+}
+
+.caixa-pesquisa input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 1.05rem; 
+  color: #4a342e;
+}
+
+.btn-pesquisa-lupa {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #8c7370;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.btn-pesquisa-lupa .material-symbols-outlined {
+  font-size: 28px !important; 
+}
+
+.acoes-cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 20px; 
+  justify-content: flex-end;
+  flex: 1; 
+}
+
+.btn-nav-texto {
+  background-color: #fff9e6; 
+  border: 1px solid #f2e3be; 
+  color: #59423b;            
+  font-size: 1rem; 
+  font-weight: 500;
+  cursor: pointer;
+  text-transform: lowercase;
+  padding: 10px 24px; 
+  border-radius: 25px;       
+  transition: all 0.2s ease;
+}
+
+.btn-nav-texto:hover {
+  background-color: #fceeb5; 
+  border-color: #e0cd9b;
+  transform: translateY(-1px);
+}
+
+.btn-icone-sacola, .btn-icone-perfil {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #4a342e;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.btn-icone-sacola .material-symbols-outlined, 
+.btn-icone-perfil .material-symbols-outlined {
+  font-size: 32px !important; 
+}
+
+.btn-icone-sacola:hover, .btn-icone-perfil:hover {
+  transform: scale(1.1);
+}
+
+.menu-categorias-horizontal {
+  display: flex;
+  justify-content: space-between; 
+  width: 100%;
+  max-width: 1000px; 
+  margin: 0 auto;
+  overflow: hidden; 
+}
+
+.menu-categorias-horizontal button {
+  background: none;
+  border: none;
+  font-size: 1.05rem; 
+  color: #735955;
+  cursor: pointer;
+  padding: 8px 0;
+  font-weight: 400;
+  position: relative;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.menu-categorias-horizontal button:hover,
+.menu-categorias-horizontal button.item-cat-ativo {
+  color: #4a342e;
+  font-weight: 500;
+}
+
+.menu-categorias-horizontal button.item-cat-ativo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #8c7370;
+}
+
+.fundo-decorativo-ethereal {
+  background-image: url('/img/Ethereal.png'); 
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.conteudo-principal-spa {
+  flex: 1;
+  width: 100%;
+  max-width: 100%; 
+  margin: 0 auto;
+  padding: 60px 4%; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+.imagens-decorativas-home {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 40px; 
+  width: 100%;
+  max-width: 1300px; 
+  margin: auto 0; 
+}
+
+.imagens-decorativas-home img {
+  flex: 1; 
+  max-width: 1000px; 
+  height: 370px; 
+  width: 900px;
+  margin-right:10px;
+  object-fit: cover; 
+  border-radius: 16px; 
+  box-shadow: 0 8px 25px rgba(140, 115, 112, 0.12); 
+  transition: transform 0.3s ease;
+}
+
+.imagens-decorativas-home img:hover {
+  transform: translateY(-6px);
+}
+
+.tela-formulario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1; 
+  width: 100%;
+}
+
+.caixa-form {
+  background-color: rgba(252, 238, 237, 0.95); 
+  backdrop-filter: blur(5px); 
+  border: 1px solid #f2dbd9;
+  border-radius: 20px;
+  padding: 40px 35px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(74, 52, 46, 0.08);
+}
+
+.caixa-form h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #4a342e;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+.caixa-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.caixa-form input {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e0cdcc;
+  border-radius: 25px; 
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  color: #4a342e;
+  outline: none;
+}
+
+.btn-enviar-form {
+  background-color: #4a342e;
+  color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+  text-transform: lowercase;
+}

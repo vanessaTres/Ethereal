@@ -6,9 +6,9 @@ export default function Home({ produtos, categoriaSelecionada, busca }) {
     <div className="tela-home">
       {exibirBannerInicial && (
         <div className="imagens-decorativas-home">
-          <img src="/img/mulher-asiática.png "/>
-          <img src="/Img/mulher-branca.jpg"/>
-          <img src="/Img/mulher-negra.png"/>
+          <img src="/img/mulher2.png"/>
+          <img src="/img/mulher1.jpg"/>
+          <img src="/img/mulher3.png"/>
         </div>
       )}
 
