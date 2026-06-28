@@ -73,8 +73,7 @@ function App() {
               onKeyDown={lidarKeyDownPesquisa}
             />
             <button className="btn-pesquisa-lupa">
-              {/*LINK OU ICONE DA LUPA*/}
-              <span className="material-icons">search</span>
+              <span className="material-symbols-outlined">search</span>
             </button>
           </div>
           <div className="acoes-cabecalho">
@@ -88,13 +87,11 @@ function App() {
             )}
             
             <button className="btn-icone-sacola">
-              {/*LINK OU ICONE DA SACOLA */}
-              <span className="material-icons">shopping_bag</span>
+              <span className="material-symbols-outlined">shopping_bag</span>
             </button>
             
             <button className="btn-icone-perfil">
-              {/*LINK OU ICONE DE PERSONAGEM*/}
-              <span className="material-icons">person</span>
+              <span className="material-symbols-outlined">person</span>
             </button>
           </div>
 

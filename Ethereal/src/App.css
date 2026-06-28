@@ -1,184 +1,387 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+/* ────────────────────────────────────────────────────────
+   1. CONFIGURAÇÕES GERAIS E RESET
+   ──────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+/* Substitua o comecinho do seu App.css por este bloco: */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+html, body {
+  width: 100%;
+  min-height: 100vh; /* Garante que o fundo ocupe toda a altura do monitor */
+  background-color: #fdfaf6; 
+  color: #3e322e;
 }
 
-#center {
+#root {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
 }
 
-#next-steps {
+.app-container {
   display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
+/* ────────────────────────────────────────────────────────
+   2. CABEÇALHO (HEADER) FIXO
+   ──────────────────────────────────────────────────────── */
+.cabecalho-etreal {
+  background-color: #fceeed; /* Rosa claro característico do mockup */
+  border-bottom: 1px solid #f2dbd9;
+  padding: 15px 5% 5px 5%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
 }
 
-#next-steps ul {
-  list-style: none;
-  padding: 0;
+.cabecalho-linha-superior {
   display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+/* Logo "Ethereal" */
+.logo-site {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #4a342e;
+  cursor: pointer;
+  user-select: none;
 }
 
-.ticks {
-  position: relative;
+/* Barra de Pesquisa */
+.caixa-pesquisa {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #e0cdcc;
+  border-radius: 20px; /* Bordas bem arredondadas conforme mockup */
+  padding: 4px 6px 4px 15px;
+  width: 35%;
+  transition: all 0.3s ease;
+}
+
+.caixa-pesquisa:focus-within {
+  border-color: #d1b1ae;
+  box-shadow: 0 0 5px rgba(209, 177, 174, 0.5);
+}
+
+.caixa-pesquisa input {
+  border: none;
+  outline: none;
+  background: transparent;
   width: 100%;
+  font-size: 0.95rem;
+  color: #4a342e;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
+.btn-pesquisa-lupa {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #8c7370;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: color 0.2s;
+}
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
+.btn-pesquisa-lupa:hover {
+  color: #4a342e;
+}
+
+/* Links e Ícones de Ação */
+.acoes-cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.boas-vindas {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #614640;
+}
+
+.btn-nav-texto {
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  color: #614640;
+  cursor: pointer;
+  text-transform: lowercase;
+  font-weight: 400;
+  transition: color 0.2s;
+}
+
+.btn-nav-texto:hover {
+  color: #b08d89;
+  text-decoration: underline;
+}
+
+.btn-icone-sacola, .btn-icone-perfil {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #4a342e;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.btn-icone-sacola:hover, .btn-icone-perfil:hover {
+  transform: scale(1.08);
+}
+
+/* Menu Horizontal de Categorias */
+.menu-categorias-horizontal {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding-top: 5px;
+  overflow-x: auto;
+}
+
+.menu-categorias-horizontal button {
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  color: #735955;
+  cursor: pointer;
+  padding: 6px 4px;
+  font-weight: 400;
+  position: relative;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.menu-categorias-horizontal button:hover,
+.menu-categorias-horizontal button.item-cat-ativo {
+  color: #4a342e;
+  font-weight: 500;
+}
+
+/* Linha sutil embaixo da categoria ativa */
+.menu-categorias-horizontal button.item-cat-ativo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #8c7370;
+}
+
+/* ────────────────────────────────────────────────────────
+   3. ÁREA PRINCIPAL E TELA HOME (IMAGENS DECORATIVAS)
+   ──────────────────────────────────────────────────────── */
+.conteudo-principal-spa {
+  flex: 1;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 5%;
+}
+
+/* Alinhamento das 3 fotos de modelos lado a lado */
+.imagens-decorativas-home {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.imagens-decorativas-home img {
+  width: 32%; /* Divide o espaço igualmente mantendo margens */
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px; /* Cantos levemente suavizados profissionalmente */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease;
+}
+
+.imagens-decorativas-home img:hover {
+  transform: translateY(-4px);
+}
+
+/* ────────────────────────────────────────────────────────
+   4. GRADE DO CATÁLOGO DE PRODUTOS
+   ──────────────────────────────────────────────────────── */
+.container-catalogo {
+  animation: fadeIn 0.4s ease;
+}
+
+.titulo-categoria {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: #4a342e;
+  margin-bottom: 25px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.grade-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.card-produto {
+  background-color: #ffffff;
+  border: 1px solid #f0e6e5;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-produto:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(140, 115, 112, 0.12);
+}
+
+.produto-imagem-box {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  overflow: hidden;
+  background-color: #faf7f7;
+  border-radius: 8px;
+}
+
+.produto-imagem-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.produto-nome {
+  font-size: 0.95rem;
+  color: #4a342e;
+  font-weight: 500;
+  margin-bottom: 6px;
+  height: 40px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.produto-preco {
+  font-size: 1.1rem;
+  color: #8c7370;
+  font-weight: 600;
+}
+
+.aviso-vazio {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #8c7370;
+  padding: 40px;
+  font-style: italic;
+}
+
+/* ────────────────────────────────────────────────────────
+   5. TELA DE FORMULÁRIO (LOGIN & CADASTRO)
+   ──────────────────────────────────────────────────────── */
+.tela-formulario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  animation: fadeIn 0.3s ease;
+}
+
+.caixa-form {
+  background-color: #fceeed; /* Caixa rosa-claro idêntica ao mockup */
+  border: 1px solid #f2dbd9;
+  border-radius: 20px;
+  padding: 40px 35px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.caixa-form h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #4a342e;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+.caixa-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Inputs arredondados do Mockup */
+.caixa-form input {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e0cdcc;
+  border-radius: 25px; /* Deixa as bordas dos inputs ovais */
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  color: #4a342e;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.caixa-form input::placeholder {
+  color: #bda6a3;
+  font-size: 0.9rem;
+}
+
+.caixa-form input:focus {
+  border-color: #8c7370;
+}
+
+/* Botão de Enviar (logar/cadastrar) */
+.btn-enviar-form {
+  background-color: #4a342e; /* Contraste forte e elegante */
+  color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+  text-transform: lowercase; /* Mantém o padrão do mockup */
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-enviar-form:hover {
+  background-color: #614640;
+}
+
+.btn-enviar-form:active {
+  transform: scale(0.98);
+}
+
+/* Animação suave de transição entre telas */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }

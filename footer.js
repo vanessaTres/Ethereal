@@ -1,1 +1,0 @@
-uma função que vai cuspir o footer completo em todos os arquivos html
