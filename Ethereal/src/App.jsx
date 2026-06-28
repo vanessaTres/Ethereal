@@ -1,121 +1,121 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useState, useEffect } from 'react'
 import './App.css'
+import Home from './paginas/Home'
+import Cadastro from './paginas/Cadastro'
+import Login from './paginas/Login'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tela, setTela] = useState('home') 
+  const [usuarioLogado, setUsuarioLogado] = useState(null)
+
+  const [produtos, setProdutos] = useState([])
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState('')
+  const [inputBusca, setInputBusca] = useState('') // O que o usuário digita
+  const [buscaConfirmada, setBuscaConfirmada] = useState('') // O que roda ao dar Enter
+
+ 
+  useEffect(() => {
+    let url = 'http://localhost:3000/produtos'
+    if (categoriaSelecionada) {
+      url = `http://localhost:3000/produtos?categoria=${categoriaSelecionada}`
+    } else if (buscaConfirmada) {
+      url = `http://localhost:3000/produtos?busca=${buscaConfirmada}`
+    }
+
+    fetch(url)
+      .then(res => res.json())
+      .then(dados => setProdutos(dados))
+  }, [categoriaSelecionada, buscaConfirmada])
+
+
+  const trocarTela = (pagina) => {
+    setTela(pagina)
+  }
+
+
+  const lidarKeyDownPesquisa = (e) => {
+    if (e.key === 'Enter') {
+      setCategoriaSelecionada('')
+      setBuscaConfirmada(inputBusca)
+      setTela('home') 
+    }
+  }
+
+  const renderizarTela = () => {
+    if (tela === 'login') {
+      return <Login navegar={trocarTela} setUsuarioLogado={setUsuarioLogado} />
+    }
+    if (tela === 'cadastro') {
+      return <Cadastro navegar={trocarTela} />
+    }
+    return (
+      <Home 
+        produtos={produtos} 
+        categoriaSelecionada={categoriaSelecionada} 
+        busca={buscaConfirmada} 
+      />
+    )
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="app-container">
+      <header className="cabecalho-etreal">
+        <div className="cabecalho-linha-superior">
+          <h1 className="logo-site" onClick={() => { setCategoriaSelecionada(''); setBuscaConfirmada(''); setInputBusca(''); trocarTela('home'); }}>
+            Ethereal
+          </h1>
+          <div className="caixa-pesquisa">
+            <input 
+              type="text" 
+              placeholder="" 
+              value={inputBusca}
+              onChange={(e) => setInputBusca(e.target.value)}
+              onKeyDown={lidarKeyDownPesquisa}
+            />
+            <button className="btn-pesquisa-lupa">
+              {/*LINK OU ICONE DA LUPA*/}
+              <span className="material-icons">search</span>
+            </button>
+          </div>
+          <div className="acoes-cabecalho">
+            {usuarioLogado ? (
+              <span className="boas-vindas">Olá, {usuarioLogado.nome.split(' ')[0]}</span>
+            ) : (
+              <>
+                <button className="btn-nav-texto" onClick={() => trocarTela('login')}>login</button>
+                <button className="btn-nav-texto" onClick={() => trocarTela('cadastro')}>cadastrar</button>
+              </>
+            )}
+            
+            <button className="btn-icone-sacola">
+              {/*LINK OU ICONE DA SACOLA */}
+              <span className="material-icons">shopping_bag</span>
+            </button>
+            
+            <button className="btn-icone-perfil">
+              {/*LINK OU ICONE DE PERSONAGEM*/}
+              <span className="material-icons">person</span>
+            </button>
+          </div>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <nav className="menu-categorias-horizontal">
+          {['Bases', 'Pós', 'Sombras', 'Blushes', 'Batons', 'Iluminadores', 'Delineadores'].map(cat => (
+            <button 
+              key={cat}
+              className={categoriaSelecionada === cat ? 'item-cat-ativo' : ''}
+              onClick={() => { setCategoriaSelecionada(cat); setBuscaConfirmada(''); setInputBusca(''); trocarTela('home'); }}
+            >
+              {cat}
+            </button>
+          ))}
+        </nav>
+      </header>
+      <main className="conteudo-principal-spa">
+        {renderizarTela()}
+      </main>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    </div>
   )
 }
 
